@@ -7,18 +7,18 @@
     LunchCheckController.$inject = ['$scope'];
 
     function LunchCheckController($scope) {
-        $scope.dishes = '';
+        $scope.chekes = '';
         $scope.message = '';
         $scope.checked = false;
 
         $scope.checkLunch = function() {
-            if ($scope.dishes.trim().length === 0) {
+            if ($scope.chekes.trim().length === 0) {
                 $scope.empty = true;
             } else {
                 $scope.checked = true;
                 $scope.empty = false;
-                var arrayDishes = $scope.dishes.split(',');
-                var arrayDishesWithoutEmptys = arrayDishes.filter(function(v) {
+                var arraychekes = $scope.chekes.split(',');
+                var arrayDishesWithoutEmptys = arraychekes.filter(function(v) {
                     return v.trim() !== '';
                 });
 
