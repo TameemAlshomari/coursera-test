@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" ng-app="LunchCheck">
+<html lang="en" ng-app="FoodCheck">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lunch Checker</title>
+    <title>Food Checker</title>
     <link rel="stylesheet" href="styles/bootstrap.min.css">
     <script src="angular.min.js"></script>
     <script src="app.js"></script>
@@ -14,17 +14,17 @@
 <body >
   <div class="container">
 
-    <div class="container" ng-controller="LunchCheckController">
-        <h1>Lunch Checker</h1>
+    <div class="container" ng-controller="FoodCheckController">
+        <h1>First Assignment</h1>
         <div class="form-group">
-            <input ng-model="chekes" id="lunch-menu" type="text" placeholder="list comma separated chekes you usually have for lunch" 
+            <input ng-model="chekes" id="Food-menu" type="text" placeholder="First Assignment"
             class="form-control" >
         </div>
         <div class="form-group">
-            <button class="btn btn-default" ng-click="checkLunch()">Check If Too Much</button>
+            <button class="btn btn-default" ng-click="checkFood()">Check First Assignment</button>
         </div>
         <div ng-show="!empty && checked" class="alert alert-success">{{message}}</div>
-        <div ng-show="empty" class="alert alert-danger">Please enter data first</div>
+        <div ng-show="empty" class="alert alert-success">Please enter data first</div>
     </div>
 
   </div>

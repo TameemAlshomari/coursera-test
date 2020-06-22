@@ -1,17 +1,17 @@
 (function() {
     'use strict';
 
-    angular.module('LunchCheck', [])
-        .controller('LunchCheckController', LunchCheckController);
+    angular.module('FoodCheck', [])
+        .controller('FoodCheckController', FoodCheckController);
 
-    LunchCheckController.$inject = ['$scope'];
+    FoodCheckController.$inject = ['$scope'];
 
-    function LunchCheckController($scope) {
+    function FoodCheckController($scope) {
         $scope.chekes = '';
         $scope.message = '';
         $scope.checked = false;
 
-        $scope.checkLunch = function() {
+        $scope.checkFood = function() {
             if ($scope.chekes.trim().length === 0) {
                 $scope.empty = true;
             } else {
