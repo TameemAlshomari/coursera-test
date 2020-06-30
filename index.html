@@ -1,68 +1,53 @@
-
-<!DOCTYPE html>
-<html lang="en" ng-app="ShoppingListCheckOff">
-
-<head>
+<!doctype html>
+<html lang="en">
+  <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Narrow Down Your Menu Choice</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Shopping List Check Off</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <style>
-    .emptyMessage {
-        font-weight: bold;
-        color: red;
-        font-size: 1.2em;
-    }
+    <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
-    li {
-        margin-bottom: 7px;
-        font-size: 1.2em;
-    }
+    <link rel="stylesheet" href="styles/bootstrap.min.css">
+    <link rel="stylesheet" href="styles/styles.css">
+    <link rel="stylesheet" href="styles/loader.css">
 
-    li > button {
-        margin-left: 6px;
-    }
+    <script src="app/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/constants.js"></script>
+    <script src="app/menusearch.service.js"></script>
+    <script src="app/narrowitdown.controller.js"></script>
+    <script src="app/found-items/found-items.directive.js"></script>
+    <script src="app/loader/loader.directive.js"></script>
+  </head>
+  <body ng-app="NarrowItDownApp">
+    <div class="container" ng-controller="NarrowItDownController as search">
+      <h1>Narrow Down Your Chinese Menu Choice</h1>
 
-    button > span {
-        color: green;
-    }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h1>Shopping List Check Off</h1>
-        <div class="row">
-            <!-- To Buy List -->
-            <div class="col-md-6" ng-controller="ToBuyController as toBuyList">
-                <h2>To Buy:</h2>
-                <ul>
-                    <li ng-repeat="item in toBuyList.items">Buy {{item.quantity}} {{item.name}}
-                        <button class="btn btn-default" ng-click="toBuyList.buyItem($index)"><span class="glyphicon glyphicon-ok"></span> Buy</button>
-                    </li>
-                </ul>
-                <div ng-if="toBuyList.items.length == 0" class="emptyMessage">Everything is bought!</div>
+      <div class="row">
+        <div class="col-md-12">
+          <form class="form">
+            <div class="form-group">
+              <input type="text" placeholder="search term" class="form-control" ng-model="search.searchTerm">
             </div>
-            <!-- Already Bought List -->
-            <div class="col-md-6" ng-controller="AlreadyBoughtController as alreadyBoughtList">
-                <h2>Already Bought:</h2>
-                <ul>
-                    <li ng-repeat="item in alreadyBoughtList.items">Bought {{item.quantity}} {{item.name}}</li>
-                </ul>
-                <div ng-if="alreadyBoughtList.items.length == 0" class="emptyMessage">Nothing bought yet.</div>
+            <div class="form-group narrow-button">
+              <button class="btn btn-primary" ng-click="search.searchMenuItem()" type="submit">Narrow It Down For Me!</button>
             </div>
+          </form>
         </div>
-    </div>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.0/angular.min.js"></script>
-    <script src="app.js"></script>
-</body>
+      </div>
 
+      <!-- Bonus loader (see Bonus section of the assignment) -->
+      <loader ng-if="search.loading"></loader>
+
+      <!-- found-items should be implemented as a component -->
+      <found-items
+        ng-if="!search.loading"
+        items="search.found"
+        message="search.message"
+        on-remove="search.removeMenuItem(index)">
+      </found-items>
+    </div>
+
+  </div>
+</body>
 </html>
