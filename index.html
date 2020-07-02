@@ -1,53 +1,47 @@
 <!doctype html>
-<html lang="en">
+<html>
   <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Narrow Down Your Menu Choice</title>
+    <title>Menu App</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="../favicon.ico" type="image/x-icon">
 
-    <link rel="stylesheet" href="styles/bootstrap.min.css">
-    <link rel="stylesheet" href="styles/styles.css">
-    <link rel="stylesheet" href="styles/loader.css">
-
-    <script src="app/angular.min.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/constants.js"></script>
-    <script src="app/menusearch.service.js"></script>
-    <script src="app/narrowitdown.controller.js"></script>
-    <script src="app/found-items/found-items.directive.js"></script>
-    <script src="app/loader/loader.directive.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/styles.css">
   </head>
-  <body ng-app="NarrowItDownApp">
-    <div class="container" ng-controller="NarrowItDownController as search">
-      <h1>Narrow Down Your Chinese Menu Choice</h1>
-
-      <div class="row">
-        <div class="col-md-12">
-          <form class="form">
-            <div class="form-group">
-              <input type="text" placeholder="search term" class="form-control" ng-model="search.searchTerm">
-            </div>
-            <div class="form-group narrow-button">
-              <button class="btn btn-primary" ng-click="search.searchMenuItem()" type="submit">Narrow It Down For Me!</button>
-            </div>
-          </form>
-        </div>
+  <body ng-app='MenuApp'>
+    <div class="container">
+      <div class="page-header">
+        <h1>Welcome to our restaurant!</h1>
       </div>
-
-      <!-- Bonus loader (see Bonus section of the assignment) -->
-      <loader ng-if="search.loading"></loader>
-
-      <!-- found-items should be implemented as a component -->
-      <found-items
-        ng-if="!search.loading"
-        items="search.found"
-        message="search.message"
-        on-remove="search.removeMenuItem(index)">
-      </found-items>
+      <ui-view></ui-view>
     </div>
 
-  </div>
-</body>
+    <!-- Libraries -->
+    <script src="lib/angular.min.js"></script>
+    <script src="lib/angular-ui-router.min.js"></script>
+
+    <!-- Modules -->
+    <script src="app/menuapp/menuapp.module.js"></script>
+    <script src="app/data/data.module.js"></script>
+    <script src="app/spinner/spinner.module.js"></script>
+
+    <!-- Routes -->
+    <script src="app/routes.js"></script>
+
+    <!-- 'data' module artifacts -->
+    <script src="app/data/constants.js"></script>
+    <script src="app/data/menudata.service.js"></script>
+
+    <!-- 'MenuApp' module artifacts -->
+    <script src="app/menuapp/categories/categories.component.js"></script>
+    <script src="app/menuapp/categories/categories.controller.js"></script>
+    <script src="app/menuapp/items/items.component.js"></script>
+    <script src="app/menuapp/items/items.controller.js"></script>
+
+    <!-- 'spinner' module artifacts -->
+    <script src="app/spinner/loadingspinner.component.js"></script>
+  </body>
 </html>
